@@ -15,6 +15,11 @@ public class Message implements Serializable {
 
    public Message(){}
 
+    public Message(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public UUID getId() {
         return id;
     }
