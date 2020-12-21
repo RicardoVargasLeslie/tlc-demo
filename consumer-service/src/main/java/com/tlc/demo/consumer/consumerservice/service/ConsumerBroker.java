@@ -12,8 +12,6 @@ public class ConsumerBroker implements ConsumerService {
     public MessageResponse receive(MessageResponse messageResponse) {
         System.err.println("IN LISTENER"+ messageResponse.toString());
 
-
-
         return messageResponse;
     }
 }
