@@ -10,6 +10,10 @@ public class ConsumerBroker implements ConsumerService {
     @Override
     @KafkaListener(groupId = "id-tlc", topics = "tlc", containerFactory = "kafkaListenerContainerFactory")
     public MessageResponse receive(MessageResponse messageResponse) {
+        System.err.println("IN LISTENER"+ messageResponse.toString());
+
+
+
         return messageResponse;
     }
 }

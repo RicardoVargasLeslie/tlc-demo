@@ -15,7 +15,6 @@ public class ConsumerController {
     @Autowired
     private ConsumerService service;
 
-    @GetMapping("/message")
     public MessageResponse receive(MessageResponse messageResponse) {
         return this.service.receive(messageResponse);
     }
