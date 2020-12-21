@@ -6,7 +6,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessageBroker implements MessageService{
+public class ProducerBroker implements ProducerService {
 
     @Autowired
     private KafkaTemplate template;

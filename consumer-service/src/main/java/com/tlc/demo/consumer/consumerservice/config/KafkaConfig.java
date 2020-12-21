@@ -25,7 +25,7 @@ public class KafkaConfig {
     private static final String ID="id-tlc";
 
     @Bean
-    public ConsumerFactory<String,Object> consumerFactory() {
+    public ConsumerFactory<String,MessageResponse> consumerFactory() {
          Map<String,Object> configMap = new HashMap<>();
          configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,LOCALHOST);
          configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -34,9 +34,9 @@ public class KafkaConfig {
          return new DefaultKafkaConsumerFactory(configMap,new StringDeserializer(),new JsonDeserializer<>(MessageResponse.class));
     }
 
-    public ConcurrentKafkaListenerContainerFactory<String,String> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String,MessageResponse> kafkaListenerContainerFactory() {
 
-         ConcurrentKafkaListenerContainerFactory <String,String> factory
+         ConcurrentKafkaListenerContainerFactory <String,MessageResponse> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
          factory.setConsumerFactory(this.consumerFactory());
          return factory;
