@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tlc")
+@RequestMapping("/tlc/v1")
 public class MessageController {
+
     @Autowired
     private MessageService service;
 
