@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/tlc/v1")
-public class MessageController {
+public class ProducerController {
 
     @Autowired
     private ProducerService service;
