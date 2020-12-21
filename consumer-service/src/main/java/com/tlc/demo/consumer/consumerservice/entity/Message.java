@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Document
+@Document(collection = "message")
 public class Message implements Serializable {
 
     @Id

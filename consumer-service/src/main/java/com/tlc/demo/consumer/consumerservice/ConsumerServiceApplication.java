@@ -47,10 +47,11 @@ public class ConsumerServiceApplication implements CommandLineRunner {
 				)
 				.thenMany(repository.findAll())
 				.subscribe(profile -> log.info("saving " + profile.toString()));
-
+/**
 		// fetch an individual customer
 		System.out.println("Customer found with findByFirstName('Alice'):");
 		System.out.println("--------------------------------");
 		System.out.println(repository.findByName("Mark"));
+ **/
 	}
 }
