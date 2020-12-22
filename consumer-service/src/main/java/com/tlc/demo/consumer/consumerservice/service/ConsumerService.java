@@ -4,4 +4,5 @@ import com.tlc.demo.consumer.consumerservice.response.MessageResponse;
 
 public interface ConsumerService {
     MessageResponse receive(MessageResponse messageResponse);
+
 }

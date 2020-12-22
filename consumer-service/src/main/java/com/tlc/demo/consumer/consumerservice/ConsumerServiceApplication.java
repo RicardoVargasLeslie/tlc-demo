@@ -1,19 +1,18 @@
 package com.tlc.demo.consumer.consumerservice;
 
-import com.tlc.demo.consumer.consumerservice.entity.Message;
-import com.tlc.demo.consumer.consumerservice.repoaitoy.MessageRepository;
+import com.tlc.demo.consumer.consumerservice.repository.MessageRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import reactor.core.publisher.Flux;
-
-import java.util.UUID;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
+import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 @Log4j2
-public class ConsumerServiceApplication implements CommandLineRunner {
+@EnableReactiveMongoRepositories
+public class ConsumerServiceApplication  implements  CommandLineRunner {
 
 	@Autowired
 	private MessageRepository repository;
@@ -25,33 +24,23 @@ public class ConsumerServiceApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		repository.deleteAll();
+		repository.deleteAll().subscribe();
+		Mono<Long> l=repository.count();
 
-		// save a couple of customers
-	//	repository.save(new Message(UUID.randomUUID(),"Mark"));
-	//	repository.save(new Message(UUID.randomUUID(),"Jon"));
+		l.subscribe(e->{
+			System.err.println(e.toString());
+		});
 
-
-		// fetch all customers
-		System.out.println("Customers found with findAll():");
-		System.out.println("-------------------------------");
-
-
-		repository
-				.deleteAll()
-				.thenMany(
-						Flux
-								.just("Mark", "Jon", "Luis", "Test")
-								.map(name -> new Message(UUID.randomUUID(), name))
-								.flatMap(repository::save)
-				)
-				.thenMany(repository.findAll())
-				.subscribe(profile -> log.info("saving " + profile.toString()));
-/**
-		// fetch an individual customer
-		System.out.println("Customer found with findByFirstName('Alice'):");
-		System.out.println("--------------------------------");
-		System.out.println(repository.findByName("Mark"));
- **/
+		/**
+		repository.deleteAll().subscribe(null,null,() -> Stream.of(
+				new Message(UUID.randomUUID(),
+				"Peter"),new Message(UUID.randomUUID(),
+				"Sam"),new Message(UUID.randomUUID(),
+				"Ryan"),new Message(UUID.randomUUID(),
+				"Chris")
+		).forEach(item -> {
+			repository.save(item).subscribe(System.out::println);
+		}));
+       **/
 	}
 }

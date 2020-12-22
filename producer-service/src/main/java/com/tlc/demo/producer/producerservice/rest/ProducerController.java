@@ -16,7 +16,8 @@ public class ProducerController {
     private ProducerService service;
 
     @PostMapping("/message")
-    public void send(@RequestBody MessageRequest request){
+    public String send(@RequestBody MessageRequest request){
         this.service.send(request);
+        return "Message sent to Kafka";
     }
 }

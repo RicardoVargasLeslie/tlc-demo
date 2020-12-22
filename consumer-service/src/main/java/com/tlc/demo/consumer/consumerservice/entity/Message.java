@@ -1,24 +1,23 @@
 package com.tlc.demo.consumer.consumerservice.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.UUID;
 
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "message")
 public class Message implements Serializable {
 
     @Id
     private UUID id;
     private String name;
-
-   public Message(){}
-
-    public Message(UUID id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public UUID getId() {
         return id;
@@ -36,11 +35,4 @@ public class Message implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

@@ -16,7 +16,7 @@ public final class ObjectMapper {
     }
     static {
         modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STANDARD);
     }
     public static <D, T> D map(final T entity, Class<D> outClass) {
         return modelMapper.map(entity, outClass);
