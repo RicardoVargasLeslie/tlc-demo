@@ -24,13 +24,14 @@ public class ConsumerServiceApplication  implements  CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		/**
 		repository.deleteAll().subscribe();
 		Mono<Long> l=repository.count();
 
 		l.subscribe(e->{
 			System.err.println(e.toString());
 		});
-
+**/
 		/**
 		repository.deleteAll().subscribe(null,null,() -> Stream.of(
 				new Message(UUID.randomUUID(),
