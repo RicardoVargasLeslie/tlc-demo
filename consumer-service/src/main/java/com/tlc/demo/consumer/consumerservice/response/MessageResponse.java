@@ -6,6 +6,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MessageResponse {
+public class MessageResponse  {
     private String name;
 }

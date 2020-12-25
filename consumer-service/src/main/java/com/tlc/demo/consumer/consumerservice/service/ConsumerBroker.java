@@ -3,6 +3,7 @@ package com.tlc.demo.consumer.consumerservice.service;
 
 import com.tlc.demo.consumer.consumerservice.entity.Message;
 import com.tlc.demo.consumer.consumerservice.mapper.ObjectMapper;
+import com.tlc.demo.consumer.consumerservice.repository.MessageRepository;
 import com.tlc.demo.consumer.consumerservice.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -17,6 +18,8 @@ public class ConsumerBroker implements ConsumerService {
     @Autowired
     private MessageService persistenceService;
 
+    private MessageRepository repo;
+
     @Override
     public MessageResponse receive(MessageResponse messageResponse) {
 
@@ -24,7 +27,12 @@ public class ConsumerBroker implements ConsumerService {
         entity = ObjectMapper.map(messageResponse, Message.class);
         entity.setId(UUID.randomUUID());
         System.err.println("entity "+ entity.toString());
-        this.persistenceService.save(entity);
-        return messageResponse;
+
+        this.repo.deleteAll().subscribe(null,null,()->{
+
+            this.repo.save(entity).subscribe(System.err::print);
+        });
+
+         return messageResponse;
     }
 }
