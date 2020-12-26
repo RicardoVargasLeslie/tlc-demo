@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProducerBroker implements ProducerService {
-
-    @Autowired
-    private KafkaTemplate template;
+    
     private static final String TOPIC="tlc";
+    private final KafkaTemplate template;
+
+    public ProducerBroker(KafkaTemplate template) {
+        this.template = template;
+    }
 
     @Override
     public String send(MessageRequest request) {

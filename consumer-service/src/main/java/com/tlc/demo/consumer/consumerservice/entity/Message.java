@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Message implements Serializable {
 
     @Id
-    private UUID id;
+    private UUID id=UUID.randomUUID();
     private String name;
 
     public UUID getId() {

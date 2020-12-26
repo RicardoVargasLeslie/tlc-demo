@@ -2,6 +2,7 @@ package com.tlc.demo.consumer.consumerservice.rest;
 
 
 import com.tlc.demo.consumer.consumerservice.entity.Message;
+import com.tlc.demo.consumer.consumerservice.repository.MessageRepository;
 import com.tlc.demo.consumer.consumerservice.response.MessageResponse;
 import com.tlc.demo.consumer.consumerservice.service.ConsumerService;
 import com.tlc.demo.consumer.consumerservice.service.MessageService;
@@ -15,23 +16,26 @@ import reactor.core.publisher.Flux;
 
 
 @RestController
-@EnableKafka
 @RequestMapping("/tlc/v1")
+@EnableKafka
 public class ConsumerController {
 
     @Autowired
     private ConsumerService consumerService;
 
-    @Autowired
-    private MessageService msgService;
-
     @KafkaListener(groupId = "id-tlc", topics = "tlc", containerFactory = "kafkaListenerContainerFactory")
-    public MessageResponse receive(MessageResponse messageResponse) {
-        return this.consumerService.receive(messageResponse);
+    public void read(MessageResponse messageResponse) {
+        this.consumerService.read(messageResponse);
     }
 
     @GetMapping("/messages")
     public Flux<Message> findAll() {
-        return this.msgService.findAll();
+        System.err.print("Holaaa findalllllllllll");
+        return this.consumerService.findAll();
+    }
+
+    @GetMapping("/adios")
+    public String adios() {
+        return "adios";
     }
 }

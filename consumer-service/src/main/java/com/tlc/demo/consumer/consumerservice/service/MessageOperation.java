@@ -14,16 +14,15 @@ import reactor.core.publisher.Mono;
 public class MessageOperation implements MessageService {
 
     @Autowired
-    private MessageRepository repo;
+    private MessageRepository repository;
 
     @Override
-    public Mono<Message> save(Message message) {
-
-        return this.repo.save(message);
+    public Mono<Message> save(final Message message) {
+         return this.repository.save(message);
     }
 
     @Override
     public Flux<Message> findAll() {
-        return this.repo.findAll();
+        return this.repository.findAll().switchIfEmpty(Flux.empty());
     }
 }

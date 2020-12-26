@@ -9,30 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.UUID;
 
 @Service
-public class ConsumerBroker implements ConsumerService {
+public class ConsumerOperation implements ConsumerService {
 
     @Autowired
     private MessageService persistenceService;
 
-    private MessageRepository repo;
-
     @Override
-    public MessageResponse receive(MessageResponse messageResponse) {
-
+    public void read(MessageResponse messageResponse) {
         Message entity;
         entity = ObjectMapper.map(messageResponse, Message.class);
-        entity.setId(UUID.randomUUID());
         System.err.println("entity "+ entity.toString());
+        this.persistenceService.save(entity);
+        //Aqui hay que suscribirse
+    }
 
-        this.repo.deleteAll().subscribe(null,null,()->{
-
-            this.repo.save(entity).subscribe(System.err::print);
-        });
-
-         return messageResponse;
+    @Override
+    public Flux<Message> findAll() {
+        return persistenceService.findAll();
     }
 }
