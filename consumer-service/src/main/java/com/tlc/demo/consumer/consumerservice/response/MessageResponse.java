@@ -1,11 +1,18 @@
 package com.tlc.demo.consumer.consumerservice.response;
 
-import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class MessageResponse  {
+public class MessageResponse {
     private String name;
+
+    public MessageResponse(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

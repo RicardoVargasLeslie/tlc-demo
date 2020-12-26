@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/tlc/v1")
+@RequestMapping("/tlc/api/v1")
 public class ProducerController {
 
     @Autowired
     private ProducerService service;
 
     @PostMapping("/message")
-    public KafkaResponse send(@RequestBody MessageRequest request){
+    public KafkaResponse send(@RequestBody final MessageRequest request){
         this.service.send(request);
         return new KafkaResponse();
     }

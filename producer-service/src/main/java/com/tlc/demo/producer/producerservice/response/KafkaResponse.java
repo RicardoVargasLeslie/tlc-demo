@@ -3,9 +3,10 @@ package com.tlc.demo.producer.producerservice.response;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class KafkaResponse {
     private final String message ="Message sent to Kafka";
-    private  final LocalDate current=LocalDate.now();
+    private final LocalDateTime current = LocalDateTime.now();
 }

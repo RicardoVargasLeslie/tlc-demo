@@ -1,8 +1,7 @@
 package com.tlc.demo.consumer.consumerservice.config;
 
-import com.tlc.demo.consumer.consumerservice.response.MessageResponse;
+import com.tlc.demo.consumer.consumerservice.request.MessageRequest;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -25,18 +24,17 @@ public class KafkaConfig {
     private static final String ID="id-tlc";
 
     @Bean
-    public ConsumerFactory<String,MessageResponse> consumerFactory() {
+    public ConsumerFactory<String, MessageRequest> consumerFactory() {
          Map<String,Object> configMap = new HashMap<>();
          configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,LOCALHOST);
          configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
          configMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonSerializer.class);
          configMap.put(ConsumerConfig.GROUP_ID_CONFIG,ID);
-         return new DefaultKafkaConsumerFactory(configMap,new StringDeserializer(),new JsonDeserializer<>(MessageResponse.class));
+         return new DefaultKafkaConsumerFactory(configMap,new StringDeserializer(),new JsonDeserializer<>(MessageRequest.class));
     }
 
-    public ConcurrentKafkaListenerContainerFactory<String,MessageResponse> kafkaListenerContainerFactory() {
-
-         ConcurrentKafkaListenerContainerFactory <String,MessageResponse> factory
+    public ConcurrentKafkaListenerContainerFactory<String, MessageRequest> kafkaListenerContainerFactory() {
+         ConcurrentKafkaListenerContainerFactory <String, MessageRequest> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
          factory.setConsumerFactory(this.consumerFactory());
          return factory;

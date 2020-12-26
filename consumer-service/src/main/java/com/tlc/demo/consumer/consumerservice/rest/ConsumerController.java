@@ -2,22 +2,20 @@ package com.tlc.demo.consumer.consumerservice.rest;
 
 
 import com.tlc.demo.consumer.consumerservice.entity.Message;
-import com.tlc.demo.consumer.consumerservice.repository.MessageRepository;
+import com.tlc.demo.consumer.consumerservice.request.MessageRequest;
 import com.tlc.demo.consumer.consumerservice.response.MessageResponse;
 import com.tlc.demo.consumer.consumerservice.service.ConsumerService;
-import com.tlc.demo.consumer.consumerservice.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 
 @RestController
-@RequestMapping("/tlc/v1")
+@RequestMapping("/tlc/api/v1")
 @EnableKafka
 public class ConsumerController {
 
@@ -25,12 +23,12 @@ public class ConsumerController {
     private ConsumerService consumerService;
 
     @KafkaListener(groupId = "id-tlc", topics = "tlc", containerFactory = "kafkaListenerContainerFactory")
-    private void read(MessageResponse messageResponse) {
-        this.consumerService.read(messageResponse);
+    private void read(final MessageRequest messageRequest) {
+        this.consumerService.read(messageRequest);
     }
 
     @GetMapping("/messages")
-    public Flux<Message> findAll() {
+    public Flux<MessageResponse> findAll() {
         return this.consumerService.findAll();
     }
 
