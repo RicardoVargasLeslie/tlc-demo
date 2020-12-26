@@ -30,7 +30,6 @@ public class ConsumerController {
 
     @GetMapping("/messages")
     public Flux<Message> findAll() {
-        System.err.print("Holaaa findalllllllllll");
         return this.consumerService.findAll();
     }
 
