@@ -18,7 +18,7 @@ public class MessageOperation implements MessageService {
 
     @Override
     public Mono<Message> save(final Message message) {
-         return this.repository.save(message);
+         return this.repository.save(message).switchIfEmpty(Mono.empty());
     }
 
     @Override

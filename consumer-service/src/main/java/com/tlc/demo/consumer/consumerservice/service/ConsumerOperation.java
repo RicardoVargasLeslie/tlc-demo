@@ -20,7 +20,7 @@ public class ConsumerOperation implements ConsumerService {
     private MessageService persistenceService;
 
     @Override
-    public void read(MessageResponse messageResponse) {
+    public void read(final MessageResponse messageResponse) {
         Message entity;
         entity = ObjectMapper.map(messageResponse, Message.class);
         System.err.println("entity "+ entity.toString());
