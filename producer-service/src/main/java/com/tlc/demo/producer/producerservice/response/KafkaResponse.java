@@ -2,7 +2,6 @@ package com.tlc.demo.producer.producerservice.response;
 
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data

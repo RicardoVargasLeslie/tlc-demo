@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
@@ -24,7 +23,7 @@ public class KafkaConfig {
     private static final String ID="id-tlc";
 
     @Bean
-    public ConsumerFactory<String, MessageRequest> consumerFactory() {
+    public DefaultKafkaConsumerFactory consumerFactory() {
          Map<String,Object> configMap = new HashMap<>();
          configMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,LOCALHOST);
          configMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);

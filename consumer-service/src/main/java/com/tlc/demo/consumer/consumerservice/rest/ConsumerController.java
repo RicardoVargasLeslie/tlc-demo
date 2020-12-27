@@ -1,7 +1,7 @@
 package com.tlc.demo.consumer.consumerservice.rest;
 
 
-import com.tlc.demo.consumer.consumerservice.entity.Message;
+
 import com.tlc.demo.consumer.consumerservice.request.MessageRequest;
 import com.tlc.demo.consumer.consumerservice.response.MessageResponse;
 import com.tlc.demo.consumer.consumerservice.service.ConsumerService;
@@ -20,7 +20,11 @@ import reactor.core.publisher.Flux;
 public class ConsumerController {
 
     @Autowired
-    private ConsumerService consumerService;
+    private final ConsumerService consumerService;
+
+    public ConsumerController(ConsumerService consumerService) {
+        this.consumerService = consumerService;
+    }
 
     @KafkaListener(groupId = "id-tlc", topics = "tlc", containerFactory = "kafkaListenerContainerFactory")
     private void read(final MessageRequest messageRequest) {
