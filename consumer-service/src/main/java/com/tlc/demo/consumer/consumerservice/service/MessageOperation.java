@@ -21,9 +21,9 @@ public class MessageOperation implements MessageService {
     @Override
     public Mono<MessageResponse> save(final Message message) {
 
-
-        this.repository.deleteAll().subscribe();
         Mono<Message> savedMessages = Mono.just(message).flatMap(this.repository::save);
+
+        this.repository.deleteAll().then(savedMessages).subscribe(log::info);
 
         return savedMessages
                 .map( item -> new MessageResponse(item.getName()));

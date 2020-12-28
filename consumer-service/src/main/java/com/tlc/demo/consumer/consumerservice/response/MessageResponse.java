@@ -1,7 +1,9 @@
 package com.tlc.demo.consumer.consumerservice.response;
 
 
-public class MessageResponse {
+import java.io.Serializable;
+
+public class MessageResponse implements Serializable {
     private String name;
 
     public MessageResponse(String name) {

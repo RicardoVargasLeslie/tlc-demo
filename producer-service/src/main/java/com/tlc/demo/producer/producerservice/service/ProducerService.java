@@ -1,7 +1,7 @@
 package com.tlc.demo.producer.producerservice.service;
 
-import com.tlc.demo.producer.producerservice.request.MessageRequest;
+import com.tlc.demo.producer.producerservice.request.MessageTest;
 
 public interface ProducerService {
-    String send(MessageRequest request);
+    String send(MessageTest request, String topic);
 }

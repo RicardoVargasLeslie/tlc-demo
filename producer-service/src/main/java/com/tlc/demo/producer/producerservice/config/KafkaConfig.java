@@ -19,15 +19,38 @@ public class KafkaConfig {
     private static final String LOCALHOST="localhost:9092";
 
     @Bean
-    public ProducerFactory<String,Object> producerFactory(){
-        Map<String,Object> configMap = new HashMap<>();
-        configMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,LOCALHOST);
-        configMap.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<String,Object>(configMap);
+    public ProducerFactory<String, Object> producerFactory() {
+        Map<String, Object> config = new HashMap<>();
+
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, LOCALHOST);
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+
+        return new DefaultKafkaProducerFactory<>(config);
     }
+
+
     @Bean
-    public KafkaTemplate<String,Object> buildTemplate(){
-        return new KafkaTemplate<>(this.producerFactory());
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
-}
+
+    /*@Bean
+    public ProducerFactory<String, MessageTest> producerFactory() {
+        Map<String, Object> config = new HashMap<>();
+
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, LOCALHOST);
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+
+        return new DefaultKafkaProducerFactory(config);
+    }
+
+
+    @Bean
+    public KafkaTemplate<String, MessageTest> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+*/
+    }
+

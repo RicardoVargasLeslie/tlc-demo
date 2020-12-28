@@ -1,6 +1,6 @@
 package com.tlc.demo.producer.producerservice.rest;
 
-import com.tlc.demo.producer.producerservice.request.MessageRequest;
+import com.tlc.demo.producer.producerservice.request.MessageTest;
 import com.tlc.demo.producer.producerservice.response.KafkaResponse;
 import com.tlc.demo.producer.producerservice.service.ProducerService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +20,10 @@ public class ProducerController {
     }
 
     @PostMapping("/message")
-    public KafkaResponse send(@RequestBody final MessageRequest request){
-        this.service.send(request);
+    public KafkaResponse send(@RequestBody final MessageTest request){
+        String topic ="tlc";
+        System.err.print(request.toString());
+        this.service.send(request,topic);
         return new KafkaResponse();
     }
 }
