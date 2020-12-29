@@ -1,7 +1,9 @@
 package com.tlc.demo.consumer.consumerservice.request;
 
 
-public class MessageRequest  {
+import java.io.Serializable;
+
+public class MessageRequest  implements Serializable {
     private String name;
 
     public MessageRequest(String name) {
