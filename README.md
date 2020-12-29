@@ -6,7 +6,7 @@
 
 
 
-![example](\docs\example.PNG)
+![example](/docs/example.PNG)
 
 
 
@@ -26,7 +26,7 @@ This is a hybrid platform that enables API-centric integration and supports vari
 
 [Quick Start Guide WSO2 Micro Integrator](https://ei.docs.wso2.com/en/latest/micro-integrator/overview/quick-start-guide/)
 
-![](\docs\wso2.PNG)
+![](/docs/wso2.PNG)
 
 ### Micro-Service(Spring-Boot)
 
@@ -42,7 +42,7 @@ This is a hybrid platform that enables API-centric integration and supports vari
 
 [Apache Kafka](https://kafka.apache.org/quickstart)
 
-[![kafka](\docs\kafka.PNG)]()
+[![kafka](/docs/kafka.PNG)]()
 
 ###  Comands for Kafka
 
@@ -74,7 +74,7 @@ This is a hybrid platform that enables API-centric integration and supports vari
 
 [MongoDB - Quck Start](https://www.mongodb.com/what-is-mongodb)
 
-![mongo](\docs\mongo.png)
+![mongo](/docs/mongo.png)
 
 ####  Comands for Mongo
 
@@ -90,7 +90,7 @@ in  **CMD** run **mongod** to fire up the `MongoDb` instance.
 
 [Kubernetes](https://kubernetes.io/docs/setup/)
 
-![](\docs\kubernetes-figure3.jpg)
+![](/docs/kubernetes-figure3.jpg)
 
 
 
