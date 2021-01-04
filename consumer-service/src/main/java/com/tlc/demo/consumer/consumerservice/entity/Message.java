@@ -13,7 +13,7 @@ import java.util.UUID;
 @Document(collection = "message")
 @NoArgsConstructor
 @Data
-public class Message  {
+public class Message implements Serializable {
 
     @Id
     @JsonIgnore
